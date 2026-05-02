@@ -7,7 +7,6 @@ import { initialFX } from "./utils/initialFX";
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
   const [loaded, setLoaded] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
