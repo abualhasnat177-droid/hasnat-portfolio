@@ -75,7 +75,7 @@ const SocialIcons = () => {
       </div>
       <a
         className="resume-button"
-        href="/Muhammad_Hasnat.pdf"
+        href="/Muhammad_Hasnat_CV.pdf"
         target="_blank"
         rel="noreferrer"
       >

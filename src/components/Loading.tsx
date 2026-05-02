@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
 
-import Marquee from "react-fast-marquee";
-
-const MarqueeComponent = (Marquee as any).default || Marquee;
+import { initialFX } from "./utils/initialFX";
 
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
@@ -12,28 +10,19 @@ const Loading = ({ percent }: { percent: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (percent >= 100) {
-    setTimeout(() => {
-      setLoaded(true);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 1000);
-    }, 600);
-  }
-
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
+    if (percent >= 100) {
+      setLoaded(true);
+      const timer = setTimeout(() => {
         setClicked(true);
+        initialFX();
         setTimeout(() => {
-          if (module.initialFX) {
-            module.initialFX();
-          }
           setIsLoading(false);
-        }, 900);
-      }
-    });
-  }, [isLoaded]);
+        }, 50);
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [percent]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const { currentTarget: target } = e;
@@ -63,10 +52,12 @@ const Loading = ({ percent }: { percent: number }) => {
       </div>
       <div className="loading-screen">
         <div className="loading-marquee">
-          <MarqueeComponent>
-            <span> Frontend Developer</span> <span>Frontend Developer</span>
-            <span> Frontend Developer</span> <span>Frontend Developer</span>
-          </MarqueeComponent>
+          <div className="marquee-content">
+            <span> Web App Developer</span> <span>Web App Developer</span>
+            <span> Web App Developer</span> <span>Web App Developer</span>
+            <span> Web App Developer</span> <span>Web App Developer</span>
+            <span> Web App Developer</span> <span>Web App Developer</span>
+          </div>
         </div>
         <div
           className={`loading-wrap ${clicked && "loading-clicked"}`}
@@ -98,21 +89,21 @@ export const setProgress = (setLoading: (value: number) => void) => {
   let percent: number = 0;
 
   let interval = setInterval(() => {
-    if (percent <= 50) {
-      const rand = Math.round(Math.random() * 5);
-      percent = percent + rand;
+    if (percent <= 80) {
+      const rand = Math.round(Math.random() * 30 + 20);
+      percent = Math.min(percent + rand, 80);
       setLoading(percent);
     } else {
       clearInterval(interval);
       interval = setInterval(() => {
-        percent = percent + Math.round(Math.random());
+        percent = percent + Math.round(Math.random() * 10 + 5);
         setLoading(percent);
-        if (percent > 91) {
+        if (percent >= 99) {
           clearInterval(interval);
         }
-      }, 2000);
+      }, 10);
     }
-  }, 100);
+  }, 15);
 
   function clear() {
     clearInterval(interval);

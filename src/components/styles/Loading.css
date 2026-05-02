@@ -320,6 +320,23 @@
   font-size: 60px;
   font-weight: 600;
   text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: flex;
+  width: max-content;
+  animation: marquee-animation 20s linear infinite;
+}
+
+@keyframes marquee-animation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .loading-marquee span {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MdArrowOutward, MdCopyright, MdSend } from "react-icons/md";
 import "./styles/Contact.css";
+import { FaLinkedinIn } from "react-icons/fa6";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -67,8 +68,8 @@ const Contact = () => {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 ></textarea>
               </div>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className={`submit-btn ${status}`}
                 disabled={status === "sending"}
               >
@@ -94,7 +95,7 @@ const Contact = () => {
                     rel="noreferrer"
                     data-cursor="disable"
                   >
-                    LinkedIn — muhammad-hasnat36
+                    <FaLinkedinIn />
                   </a>
                 </p>
                 <h4>Education</h4>
@@ -122,7 +123,7 @@ const Contact = () => {
                 </a>
               </div>
             </div>
-            
+
             <div className="contact-footer">
               <div className="contact-box">
                 <h2>

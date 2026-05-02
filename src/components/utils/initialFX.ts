@@ -8,8 +8,8 @@ export function initialFX() {
   document.getElementsByTagName("main")[0].classList.add("main-active");
   gsap.to("body", {
     backgroundColor: "#0a0e17",
-    duration: 0.5,
-    delay: 1,
+    duration: 0.3,
+    delay: 0.2,
   });
 
   var landingText = new SplitText(
@@ -24,12 +24,12 @@ export function initialFX() {
     { opacity: 0, y: 80, filter: "blur(5px)" },
     {
       opacity: 1,
-      duration: 1.2,
+      duration: 0.8,
       filter: "blur(0px)",
-      ease: "power3.inOut",
+      ease: "power3.out",
       y: 0,
-      stagger: 0.025,
-      delay: 0.3,
+      stagger: 0.015,
+      delay: 0.05,
     }
   );
 
@@ -41,12 +41,12 @@ export function initialFX() {
     { opacity: 0, y: 80, filter: "blur(5px)" },
     {
       opacity: 1,
-      duration: 1.2,
+      duration: 0.8,
       filter: "blur(0px)",
-      ease: "power3.inOut",
+      ease: "power3.out",
       y: 0,
-      stagger: 0.025,
-      delay: 0.3,
+      stagger: 0.015,
+      delay: 0.05,
     }
   );
 
@@ -55,10 +55,10 @@ export function initialFX() {
     { opacity: 0, y: 30 },
     {
       opacity: 1,
-      duration: 1.2,
-      ease: "power1.inOut",
+      duration: 0.8,
+      ease: "power1.out",
       y: 0,
-      delay: 0.8,
+      delay: 0.2,
     }
   );
   gsap.fromTo(
