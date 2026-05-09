@@ -22,14 +22,17 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
       } else {
+        console.error("API Error:", data.error, data.details);
         setStatus("error");
       }
     } catch (error) {
-      console.error("Error sending message:", error);
+      console.error("Fetch Error:", error);
       setStatus("error");
     }
   };
