@@ -24,7 +24,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: "abualhasnat177@gmail.com", // Your email
+    to: "muhammadhasnatctn@gmail.com", // Your email
     subject: `New Portfolio Message from ${name}`,
     text: `
       Name: ${name}
