@@ -10,6 +10,7 @@ const Contact = () => {
     message: "",
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,12 +28,15 @@ const Contact = () => {
       if (response.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
+        setErrorMessage("");
       } else {
         console.error("API Error:", data.error, data.details);
+        setErrorMessage(data.details || data.error || "Failed to send message.");
         setStatus("error");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Fetch Error:", error);
+      setErrorMessage(error.message || "Something went wrong. Please check your connection.");
       setStatus("error");
     }
   };
@@ -83,7 +87,11 @@ const Contact = () => {
                 )}
               </button>
               {status === "success" && <p className="status-msg success">Message sent successfully!</p>}
-              {status === "error" && <p className="status-msg error">Something went wrong. Please try again.</p>}
+              {status === "error" && (
+                <p className="status-msg error">
+                  {errorMessage || "Something went wrong. Please try again."}
+                </p>
+              )}
             </form>
           </div>
 
